@@ -23,10 +23,30 @@ const Body = () => {
 
   // Offer cards
   const offerCards = [
-    { title: 'Limited Time Offers!', description: 'Get up to 30% OFF on your favorite meals', bg: 'bg-gradient-to-r from-red-500 to-orange-500' },
-    { title: 'Weekend Specials!', description: 'Enjoy 20% OFF on orders above ₹500', bg: 'bg-gradient-to-r from-yellow-500 to-red-500' },
-    { title: 'Family Meals', description: 'Get a 15% discount on family combos', bg: 'bg-gradient-to-r from-orange-500 to-yellow-400' },
-    { title: 'Happy Hours!', description: 'Buy 1 Get 1 Free on select items', bg: 'bg-gradient-to-r from-red-600 to-yellow-500' },
+    {
+      title: '🔥 Feast Frenzy Extravaganza!',
+      description: 'Unlock 40% OFF on our chef\'s most exclusive gourmet creations',
+      bg: 'bg-cover bg-center',
+      image: 'https://images.pexels.com/photos/905847/pexels-photo-905847.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    },
+    {
+      title: '🍕 Pizza Paradise Bonanza',
+      description: 'Buy 2 Pizzas, Get 3rd FREE + Unlimited Garlic Bread!',
+      bg: 'bg-cover bg-center',
+      image: 'https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg?auto=compress&cs=tinysrgb&w=600'
+    },
+    {
+      title: '🍣 Sushi Lovers Delight',
+      description: 'All-You-Can-Eat Sushi Night - 50% OFF Premium Rolls!',
+      bg: 'bg-cover bg-center',
+      image: 'https://images.pexels.com/photos/2116094/pexels-photo-2116094.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    },
+    {
+      title: '🍔 Burger Blowout Weekend',
+      description: 'Craft Burger Challenge: 5 Unique Burgers, Insane Discounts!',
+      bg: 'bg-cover bg-center',
+      image: 'https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=600'
+    }
   ];
 
   useEffect(() => {
@@ -78,19 +98,19 @@ const Body = () => {
   const handleCartClick = () => navigate('/cart');
 
   const imageLinks = [
-    "https://cdn-icons-png.flaticon.com/128/628/628193.png",
-    "https://cdn-icons-png.flaticon.com/128/11939/11939888.png",
-    "https://cdn-icons-png.flaticon.com/128/2276/2276941.png",
-    "https://cdn-icons-png.flaticon.com/128/1531/1531385.png",
-    "https://cdn-icons-png.flaticon.com/128/5876/5876354.png",
-    "https://cdn-icons-png.flaticon.com/128/2812/2812276.png",
-    "https://cdn-icons-png.flaticon.com/128/9487/9487332.png",
+    "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/6544243/pexels-photo-6544243.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/1117862/pexels-photo-1117862.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/2474658/pexels-photo-2474658.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/29148133/pexels-photo-29148133/free-photo-of-traditional-indian-thali-meal-with-naan-bread.jpeg?auto=compress&cs=tinysrgb&w=600",
   ];
 
   return (
     <div className="relative flex flex-col items-center p-0 bg-gray-50">
       {/* Offers Banner */}
-      <div className="w-full overflow-x-hidden mb-6 mt-20 relative h-40">
+      {/* <div className="w-full overflow-x-hidden mb-6 mt-20 relative h-40">
         <AnimatePresence>
           {offerCards.map((offer, index) => (
             index === currentOfferIndex && (
@@ -108,87 +128,182 @@ const Body = () => {
             )
           ))}
         </AnimatePresence>
+      </div> */}
+      <div className="w-full overflow-x-hidden mb-6 mt-28 relative h-96 rounded-xl shadow-2xl">
+        <AnimatePresence>
+          {offerCards.map((offer, index) => (
+            index === currentOfferIndex && (
+              <motion.div
+                key={index}
+                className={`absolute inset-0 flex flex-col items-center justify-center text-white p-6 rounded-xl overflow-hidden ${offer.bg}`}
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${offer.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+              >
+                <div className="text-center max-w-xl px-4">
+                  <h2 className="text-4xl font-extrabold mb-4 drop-shadow-lg">
+                    {offer.title}
+                  </h2>
+                  <p className="text-2xl font-semibold drop-shadow-md">
+                    {offer.description}
+                  </p>
+                  <button className="mt-6 px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    Claim Offer Now!
+                  </button>
+                </div>
+              </motion.div>
+            )
+          ))}
+        </AnimatePresence>
       </div>
 
       {/* Filter Buttons */}
-      <div className="fixed top-14 right-0 w-full bg-gray-900/20 bg-opacity-30 backdrop-filter backdrop-blur-lg shadow-lg rounded-lg px-4 py-2 z-20 border border-opacity-30 border-white">
-        <div className="w-full flex space-x-3 overflow-x-auto no-scrollbar p-2">
+      <div 
+      className="fixed top-16 right-0 w-full z-20"
+      style={{
+        background: 'linear-gradient(to right, rgba(255,255,255,0.1), rgba(220,38,38,0.05))',
+        backdropFilter: 'blur(15px)',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+      }}
+    >
+      <div className="container mx-auto">
+        <div className="w-full flex space-x-3 overflow-x-auto no-scrollbar py-3 px-2">
+          {/* All Category Button */}
           <motion.button
-            className={`px-4 py-2 whitespace-nowrap rounded-full ${filter === '' ? 'bg-gray-800 text-white shadow-lg' : 'bg-gray-200 text-gray-700'} transition-all transform hover:scale-105 focus:outline-none`}
+            className={`
+              px-5 py-2 whitespace-nowrap rounded-full 
+              transition-all duration-300 ease-in-out
+              ${filter === '' 
+                ? 'bg-red-600 text-white shadow-lg' 
+                : 'bg-gray-300 text-gray-700 hover:bg-red-50 hover:text-red-600'}
+            `}
             onClick={() => handleFilterChange('All')}
+            whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
           >
-            <span className="text-sm font-medium">All</span>
+            <span className="text-sm font-semibold">All</span>
           </motion.button>
+
+          {/* Category Buttons */}
           {categories.map((category, index) => (
             <motion.button
               key={index}
-              className={`px-4 py-2 whitespace-nowrap rounded-full ${filter === category ? 'bg-gray-800 text-white shadow-lg' : 'bg-gray-200 text-gray-700'} transition-all transform hover:scale-105 focus:outline-none`}
+              className={`
+                px-5 py-2 whitespace-nowrap rounded-full 
+                transition-all duration-300 ease-in-out
+                ${filter === category 
+                  ? 'bg-red-600 text-white shadow-lg' 
+                  : 'bg-gray-300 text-gray-700 hover:bg-red-50 hover:text-red-600'}
+              `}
               onClick={() => handleFilterChange(category)}
+              whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
             >
-              <span className="text-sm font-medium">{category}</span>
+              <span className="text-sm font-semibold">{category}</span>
             </motion.button>
           ))}
         </div>
       </div>
 
-      {/* Categories Filter */}
-      <div
-        className="w-full mb-6 flex overflow-x-auto rounded-lg bg-gradient-to-r from-red/60 to-red-800/60 backdrop-blur-md m-auto shadow-lg items-center content-center"
+      {/* Gradient Border Effect */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-0.5"
         style={{
-          scrollbarColor: "#ef4444 transparent", // Scrollbar color for Firefox
-          scrollbarWidth: "thin", // Set to thin for Firefox
+          background: 'linear-gradient(to right, transparent, rgba(220,38,38,0.3), transparent)'
         }}
+      />
+    </div>
+
+      {/* Categories Filter */} 
+      <h5 className='font-bold text-gray-900 text-xl mb-3 text-left'>What are you <span className='text-red-500 text-2xl'>craving</span> for?</h5>
+      <div 
+      className="w-full mb-6 py-4 flex overflow-x-auto space-x-4 no-scrollbar"
+      style={{
+        backdropFilter: 'blur(10px)',
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.2))',
+        boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18)'
+      }}
+    >
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+
+      {/* All Food Items Card */}
+      <motion.div 
+        className="flex-shrink-0 transform transition-all duration-300 hover:scale-105"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
-        {/* Scrollbar styling for Webkit browsers (Chrome, Safari) */}
-        <style jsx>{`
-    ::-webkit-scrollbar {
-      height: 8px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: #ef4444; // Red scrollbar thumb
-      border-radius: 20px;
-    }
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-  `}</style>
-
         <motion.button
-          className={`flex flex-col items-center p-4 rounded-lg bg-white ${filter === '' ? 'bg-yellow-100' : ''
-            } shadow-lg transition-all mx-2`}
+          className={`relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-300 
+            ${filter === '' ? 'ring-4 ring-yellow-400' : 'hover:ring-2 hover:ring-white'}
+            w-[130px] h-[160px] flex flex-col justify-end p-4`}
           onClick={() => handleFilterChange('All')}
-          style={{ minWidth: '100px', minHeight: '150px' }}
+          style={{
+            background: 'linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7))',
+            backdropFilter: 'blur(10px)',
+            backgroundImage: 'url("https://images.pexels.com/photos/2180875/pexels-photo-2180875.jpeg?auto=compress&cs=tinysrgb&w=600")',
+            backgroundSize: '100%',
+            backgroundPosition: 'center 30%',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/11790/11790471.png"
-            alt="All Food Items"
-            className="h-20 w-20 mb-2"
-          />
-          <span className="text-sm font-medium text-gray-700">All Food Items</span>
+          <div className="absolute inset-0 bg-black opacity-30"></div>
+          <div className="relative z-10 text-white text-center">
+            <span className="text-lg font-bold drop-shadow-lg">
+              All Food Items
+            </span>
+          </div>
         </motion.button>
+      </motion.div>
 
-        {[...subCategories, ...categories].map((category, index) => (
+      {/* Category Cards */}
+      {[...subCategories, ...categories].map((category, index) => (
+        <motion.div 
+          key={index} 
+          className="flex-shrink-0 transform transition-all duration-300 hover:scale-105"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <motion.button
-            key={index}
-            className={`flex flex-col items-center p-4 rounded-lg bg-white ${filter === category ? 'bg-yellow-100 text-black' : ''
-              } shadow-lg transition-all mx-2`}
+            className={`relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-300 
+              ${filter === category ? 'ring-4 ring-yellow-400' : 'hover:ring-2 hover:ring-white'}
+              w-[130px] h-[160px] flex flex-col justify-end p-4`}
             onClick={() => handleFilterChange(category)}
-            style={{ minWidth: '100px', minHeight: '150px' }}
+            style={{
+              background: 'linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7))',
+              backdropFilter: 'blur(10px)',
+              backgroundImage: `url(${imageLinks[index % imageLinks.length]})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
           >
-            <img
-              src={imageLinks[index % imageLinks.length]} // Cycle through images based on index
-              alt={category}
-              className="h-20 w-20 mb-2"
-            />
-            <span className="text-sm font-medium text-gray-700">{category}</span>
+            <div className="absolute inset-0 bg-black opacity-30"></div>
+            <div className="relative z-10 text-white text-center">
+              <span className="text-lg font-bold drop-shadow-lg">
+                {category}
+              </span>
+            </div>
           </motion.button>
-        ))}
-      </div>
+        </motion.div>
+      ))}
+    </div>
 
 
       {/* Search Bar */}
+      <h5 className='font-bold text-gray-900 text-xl mb-3 text-left'>WebReich's <span className='text-red-500 text-2xl'>Menu</span></h5>
       <div className="w-full max-w-md flex items-center bg-white rounded-full shadow-md p-3 mb-2">
         <FaSearch className="text-gray-400 ml-3" />
         <input
@@ -202,7 +317,7 @@ const Body = () => {
 
       {/* Food Items Grid */}
       <motion.div className="w-full max-w-6xl p-5 mb-12 bg-white rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Top Quality Picks</h2>
+        {/* <h2 className="text-3xl font-bold text-gray-800 mb-6">Top Quality Picks</h2> */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredItems.map(item => {
             const itemInCart = cartItems.find(cartItem => cartItem.id === item.id);
@@ -339,16 +454,16 @@ const Body = () => {
 
       {/* Floating Cart Button */}
       <div
-        className="fixed bottom-6 right-6 p-3 bg-gradient-to-r from-red-500 to-red-400 text-white rounded-full shadow-lg cursor-pointer hover:scale-105 transition-all"
+        className="fixed bottom-6 right-6 p-2 bg-gradient-to-r from-red-500 to-red-400 text-white rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-all"
         onClick={handleCartClick}
       >
         <div className='flex items-center'>
-          <p className='text-white font-semibold text-lg px-2'>view cart</p>
           <FaShoppingCart size={24} />
+          <p className='text-white font-semibold text-lg px-2'>view cart</p>
         </div>
 
         {cartCount > 0 && (
-          <span className="absolute top-0 right-0 w-5 h-5 rounded-full bg-black flex items-center justify-center text-xs font-bold text-white">
+          <span className="absolute top-0 left-0 w-5 h-5 rounded-full border border-1-white bg-black flex items-center justify-center text-xs font-bold text-white">
             {cartCount}
           </span>
         )}
